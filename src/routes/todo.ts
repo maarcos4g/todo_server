@@ -20,7 +20,9 @@ export async function todoRoutes(fastify: FastifyInstance) {
     const createTodoBody = z.object({
       title: z.string(),
       category: z.string(),
-      endDate: z.date(),
+      endDate: z.coerce.date({
+        invalid_type_error: "The expected type is a Date",
+      }),
       description: z.string(),
     })
 
@@ -34,6 +36,12 @@ export async function todoRoutes(fastify: FastifyInstance) {
         description,
       }
     })
+
+    if (!todo) {
+      return reply.status(400).send({
+        message: 'Todo not found.'
+      })
+    }
 
     return reply.status(201).send({ todo });
   })
@@ -58,14 +66,14 @@ export async function todoRoutes(fastify: FastifyInstance) {
   fastify.delete<{Params: IRequestParams}>('/todo/:id', async (request, reply) => {
     const { id } = request.params;
 
-    const todo = await prisma.todo.delete({
+    await prisma.todo.delete({
       where: {
         id,
       }
     })
 
     reply.send({
-      "message": `Your todo named "${todo.title}" was deleted`,
+      "message": "Your todo was deleted",
     })
   })
 }
