@@ -26,6 +26,9 @@ Enter the project directory
   cd todo_server
 ```
 
+Rename the file
+``.env-example`` to ``.env``
+
 Install the dependencies
 ```bash
   npm install
