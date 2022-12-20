@@ -14,6 +14,27 @@ export async function todoRoutes(fastify: FastifyInstance) {
 
     return { todos }
   })
+  //list todos not completed
+  fastify.get('/todos/incomplete', async () => {
+    const todos = await prisma.todo.findMany({
+      where: {
+        isFinished: false,
+      }
+    });
+
+    return { todos }
+  })
+
+  // list todos completed
+  fastify.get('/todos/completed', async () => {
+    const todos = await prisma.todo.findMany({
+      where: {
+        isFinished: true,
+      }
+    });
+
+    return { todos }
+  })
 
   //create new todos
   fastify.post('/todo/new', async (request, reply) => {
