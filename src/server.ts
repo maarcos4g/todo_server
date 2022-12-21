@@ -4,6 +4,8 @@ import cors from "@fastify/cors";
 import { todoRoutes } from "./routes/todo";
 
 async function bootstrap() {
+  const PORT = process.env.PORT || 3333;
+
   const fastify = Fastify({
     logger: true,
   })
@@ -14,9 +16,7 @@ async function bootstrap() {
 
   await fastify.register(todoRoutes)
 
-  await fastify.listen({
-    port: 3333,
-  })
+  await fastify.listen(PORT)
 }
 
 bootstrap();
