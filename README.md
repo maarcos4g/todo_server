@@ -40,4 +40,4 @@ Start the server
 ```
 <hr>
 
-### The frontend can be found at https://github.com/maarcos4g/todo_app
+### The frontend can be found [here](https://github.com/maarcos4g/todo_app)
