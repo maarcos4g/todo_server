@@ -14,6 +14,7 @@ export async function todoRoutes(fastify: FastifyInstance) {
 
     return { todos }
   })
+  
   //list todos not completed
   fastify.get('/todos/incomplete', async () => {
     const todos = await prisma.todo.findMany({
